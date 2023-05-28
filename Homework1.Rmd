@@ -20,6 +20,25 @@ peso_mensual <- c(peso_mes1, peso_mes2, peso_mes3, peso_mes4, peso_mes5)
 
 control_peso <- matrix(peso_mensual, byrow = TRUE, nrow = 5)
 
+meses <- c("Enero", "Febrero", "Marzo", "Abril", "Mayo")
+personas <- c("Pedro", "Jose", "Juan", "María", "Sofía")
+colnames(control_peso) <- meses
+rownames(control_peso) <- personas
+control_peso
+
+#Media
+install.packages("matrixStats")
+library(matrixStats)
+
+rowSums(control_peso/5)
+
+PromedioXpersona <- rowSums(control_peso/5)
+promedioMensual <- colSums(control_peso/5)
+control_final <- cbind(control_peso, PromedioXpersona)
+
+Control_peso_mensual <- rbind(control_final, promedioMensual)
+Control_peso_mensual
+
 ```
 
 
