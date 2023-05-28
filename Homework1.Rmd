@@ -1,0 +1,11 @@
+TAREA
+```{r}
+c(1,2,3)
+numeric_vector <- c(1,2,3)
+class(numeric_vector)
+
+character_vector <- c("a","b","c")
+boolean_vector <- c(TRUE, FALSE, TRUE)
+class(boolean_vector)
+```
+
