@@ -8,4 +8,19 @@ character_vector <- c("a","b","c")
 boolean_vector <- c(TRUE, FALSE, TRUE)
 class(boolean_vector)
 ```
+Matis 5x5
+```{r}
+peso_mes1 <- c(160, 164.3, 178.4, 190.4, 175)
+peso_mes2 <- c(161, 164.1, 178.0, 190.4, 175.7)
+peso_mes3 <- c(162, 164.7, 178.6, 190.7, 176)
+peso_mes4 <- c(160, 163.3, 175.6, 191.4, 174.3)
+peso_mes5 <- c(161, 162.3, 174.4, 188.5, 173.3)
+
+peso_mensual <- c(peso_mes1, peso_mes2, peso_mes3, peso_mes4, peso_mes5)
+
+control_peso <- matrix(peso_mensual, byrow = TRUE, nrow = 5)
+
+```
+
+
 
