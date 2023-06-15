@@ -41,5 +41,24 @@ Control_peso_mensual
 
 ```
 
+Clase de Functions
+```{r}
+pow_two <- function(x){
+  y <- x^2
+  return(y)
+}
+ pow_two(4)
+ 
+ 
+ pow_two <- function(x, print_info=TRUE){
+   y <- x^2
+   if(print_info){
+     print(paste(x,"To the power two equals", y))
+   }
+   return(y)
+ }
+ pow_two(3)
+ 
+```
 
 

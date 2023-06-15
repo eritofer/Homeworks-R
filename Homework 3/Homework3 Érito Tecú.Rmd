@@ -1,0 +1,40 @@
+HOMEWORK 3
+NOMBRE: Ério Fernando Tecú Xitumul
+
+
+
+```{r}
+datos <- read.csv(file.choose(), header = TRUE, sep = ",") #se abre la ventana para elegir el archivo CSV
+names(datos)
+
+```
+```{r}
+library(dplyr)
+dataset_results <- read.csv(file.choose(), header = TRUE, sep = ",") #se abre la ventana para elegir y cargar el archivo CSV
+
+#1) Filtrar los votos de Florida
+dataset_results %>%
+  filter(state == "Florida")
+
+#2) Utilice operadores lógicos (& and |), según corresponda:
+dataset_results %>%
+  filter(candidate == "Donald Trump" | candidate == "Hillary Clinton") # Hillary o Donald
+
+dataset_results %>%
+  filter(party == "Democrat" & county == "Shelby")
+
+dataset_results %>%
+  filter(state == "Alabama" & votes > 15000)
+
+#3) Utilice la función select y arrange para el siguiente filtrado:
+select( dataset_results %>% filter(state == "Texas" & county == "Denton") %>% arrange(desc(votes)), party, candidate, votes)
+
+#4) Utilice el verbo mutate y arrange para el siguiente filtrado:
+dataset_results %>%
+  filter(party == "Republican" & candidate == "Ted Cruz" & state == "Alaska") %>%
+  mutate(vote_count = votes/fraction_votes) %>%
+  arrange(desc(vote_count))
+
+```
+
+
