@@ -1,0 +1,79 @@
+
+Homework 5
+NOMBRE: Érito Fernando Tecú Xitumul
+
+Cargando los sets de datos
+```{r}
+library(tidyverse)
+library(dplyr)
+
+questions <- read.csv("questions.csv")
+answers <- read.csv("answers.csv")
+tags <- read.csv("tags.csv")
+question_tags <- read.csv("question_tags.csv")
+
+
+```
+
+
+```{r}
+#Utilice left_joins en este ejercicio para asegurarse de mantener todas las preguntas, incluso
+#aquellas sin un tag correspondiente.
+
+questions_with_tags <- questions %>%
+  left_join(question_tags, by =c("id" = "question_id")) %>%
+  left_join(tags, by = c("tag_id" = "id")) %>%
+  replace_na(list(tag_name =  "only-r"))
+```
+2. Comparing scores across tags
+Realice un breve análisis, para ello utilice verbos de la familia dplyr como group by, summarize,
+arrange y averigue el score promedio de las preguntas más frecuentes.
+```{r}
+
+questions_with_tags %>%
+  group_by(tag_name) %>%
+  summarise(mean_score = mean(score)) %>%
+  arrange(desc(mean_score))
+  
+
+```
+3. Finding gaps between questions and answers
+Ahora uniremos questions con answers. Asegúrese de explorar las tablas y sus columnas en la
+consola antes de comenzar el ejercicio
+```{r}
+questions %>%
+  inner_join(answers, by = c("id" = "question_id"), suffix=c("_question", "_answer")) %>%
+  mutate(gap = as.Date(creation_date_answer) - as.Date(creation_date_question))
+```
+4. Joining question and answer counts
+También podemos determinar cuántas preguntas realmente arrojan respuestas. Si contamos el
+número de respuestas para cada pregunta, podemos unir los conteos de respuestas con la tabla
+de preguntas
+
+```{r}
+answer_counts <- answers %>%
+  count(question_id)
+
+question_answer_counts <- questions %>%
+  left_join(answer_counts, by =c("id" = "question_id")) %>%
+  replace_na(list(n = 0))
+```
+
+5. Joining questions, answers, and tags
+Identifiquemos qué temas de R generan más interés en Stack Overflow
+```{r}
+question_tags
+question_answer_counts
+tags
+
+question_tags %>%
+  inner_join(question_answer_counts, by = c("question_id" = "id")) %>%
+  inner_join(tags, by = c("tag_id" = "id"))
+
+
+```
+
+
+
+
+
